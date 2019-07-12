@@ -22,6 +22,7 @@ const config = {
     },
     query_limit: process.env.MONGODB_QUERY_LIMIT,
     },
+    mongodb_url: process.env.MONGODB_URI
 }
 
 module.exports = config;
