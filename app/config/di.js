@@ -45,9 +45,10 @@ serviceLocator.register('logger', () => {
  */
 serviceLocator.register('mongo', (servicelocator) => {
   const logger = servicelocator.get('logger');
-  const connectionString = config.mongodb_url || (!config.mongodb.username || !config.mongodb.password) ? `mongodb://${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.db}` : `mongodb://${config.mongodb.username}:${config.mongodb.password}@${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.db}`;
+  //const connectionString = (!config.mongodb.username || !config.mongodb.password) ? `mongodb://${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.db}` : `mongodb://${config.mongodb.username}:${config.mongodb.password}@${config.mongodb.host}:${config.mongodb.port}/${config.mongodb.db}`;
+  const connectionString = config.mongodb_url
   mongoose.Promise = bluebird;
-  logger.info('connectionString', connectionString)
+  console.log('connectionString', connectionString)
   const mongo = mongoose.connect(connectionString);
   mongo
     .then((data) => {

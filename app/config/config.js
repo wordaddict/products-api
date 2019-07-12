@@ -11,6 +11,7 @@ const config = {
         level: process.env.LOG_LEVEL || 'warn',
         console: process.env.LOG_ENABLE_CONSOLE || true,
       },
+    mongodb_url: process.env.MONGODB_URI,
     mongodb: {
     host: process.env.MONGO_HOST,
     username: process.env.MONGO_USER,
@@ -22,7 +23,6 @@ const config = {
     },
     query_limit: process.env.MONGODB_QUERY_LIMIT,
     },
-    mongodb_url: process.env.MONGODB_URI
 }
 
 module.exports = config;
