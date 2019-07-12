@@ -20,6 +20,21 @@ const logger = serviceLocator.get('logger');
 
 const restify = require('restify');
 const plugins = require('restify-plugins');
+const corsMiddleware = require('restify-cors-middleware')
+
+const cors = corsMiddleware({
+  preflightMaxAge: 5, //Optional
+  origins: ['*'],
+  allowHeaders: ['content-type', 'authentication', 'authorization'],
+  exposeHeaders: ['content-type', 'authentication', 'authorization'],
+})
+// set request handling and parsing
+
+server.pre(cors.preflight);
+server.use(cors.actual);
+// restify.defaultResponseHeaders = function(data) {
+//     this.header(server, 'Authorization');
+// };
 
 const server = restify.createServer({
     name: config.app_name,
