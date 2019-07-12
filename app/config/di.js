@@ -57,14 +57,6 @@ serviceLocator.register('mongo', (servicelocator) => {
       logger.error('Unable to connect to MongoDB', err)
     })
 
-  // If the Node process ends, close the Mongoose connection
-  process.on('SIGINT', () => {
-    mongo.connection.close(() => {
-      logger.error('Mongoose default connection disconnected through app termination');
-      process.exit(0);
-    });
-  });
-
   return mongo;
 });
 

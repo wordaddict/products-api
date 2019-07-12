@@ -1,16 +1,23 @@
 {
   "name": "service",
   "version": "1.0.0",
-  "description": "A micro-service that connects to Dynmamic server and updates number of work days based on months",
+  "description": "An API that creates and saves products",
   "main": "index.js",
   "scripts": {
     "start": "node app/api.js",
     "api": "node app/api.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [
+    "heroku"
+  ],
+  "engines": {
+    "node": "10.8.0",
+    "npm": "6.2.0"
+  },
   "repository": {
     "type": "git",
-    "url": "git+https://wordaddict@github.com/gbnlrepo/work-day-microservice.git"
+    "url": ""
   },
   "author": "",
   "license": "ISC",
@@ -20,10 +27,13 @@
   "homepage": "https://github.com/gbnlrepo/work-day-microservice#readme",
   "dependencies": {
     "dotenv": "8.0.0",
+    "express": "^4.17.1",
     "mongoose": "^5.6.4",
     "mssql": "5.1.0",
+    "multer": "^1.4.1",
     "restify": "8.3.3",
     "restify-plugins": "1.6.0",
+    "uuid": "^3.3.2",
     "winston": "^3.2.1",
     "winston-daily-rotate-file": "^3.9.0"
   }

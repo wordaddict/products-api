@@ -1,17 +1,7 @@
 /* eslint-disable no-unused-vars */
 /**
- * Created by kingriyor
- * Updated by Adeyinka Micheal on 21st February 2019
+ * Created by Adeyinka Micheal
  */
-
-ID
-Name
-Description
-Price
-Category
-Image
-Color
-
 
 const mongoose = require('mongoose');
 
@@ -41,10 +31,10 @@ const ProductSchema = new Schema({
     type: String,
     required: true,
   },
-  image: {
-    type: String,
-    required: true,
-  },
+  img: { 
+    data: Buffer,
+    contentType: String
+ },
   color: {
     type: String,
     required: true,

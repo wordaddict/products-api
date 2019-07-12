@@ -6,6 +6,9 @@ dotenv.config();
 const config = require('./config/config');
 const routes = require('./routes/product')
 
+
+const multer = require('multer');
+
 // service locator via dependency injection
 const serviceLocator = require('../app/config/di');
 
@@ -25,6 +28,7 @@ const server = restify.createServer({
 
 // set API versioning and allow trailing slashes
 server.pre(restify.pre.sanitizePath());
+
 
 // set request handling and parsing
 server.use(plugins.acceptParser(server.acceptable));
