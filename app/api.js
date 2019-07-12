@@ -30,8 +30,7 @@ const cors = corsMiddleware({
 })
 // set request handling and parsing
 
-server.pre(cors.preflight);
-server.use(cors.actual);
+
 // restify.defaultResponseHeaders = function(data) {
 //     this.header(server, 'Authorization');
 // };
@@ -40,6 +39,9 @@ const server = restify.createServer({
     name: config.app_name,
     versions: ['1.0.0'],
 });
+
+server.pre(cors.preflight);
+server.use(cors.actual);
 
 // set API versioning and allow trailing slashes
 server.pre(restify.pre.sanitizePath());
