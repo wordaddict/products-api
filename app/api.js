@@ -25,8 +25,8 @@ const corsMiddleware = require('restify-cors-middleware')
 const cors = corsMiddleware({
   preflightMaxAge: 5, //Optional
   origins: ['*'],
-  allowHeaders: ['content-type', 'authentication', 'authorization'],
-  exposeHeaders: ['content-type', 'authentication', 'authorization'],
+  allowHeaders: ['Content-Type', 'authentication', 'authorization', 'Accept'],
+  exposeHeaders: ['Content-Type', 'authentication', 'authorization', 'Accept'],
 })
 // set request handling and parsing
 
@@ -39,6 +39,7 @@ const server = restify.createServer({
     name: config.app_name,
     versions: ['1.0.0'],
 });
+
 
 server.pre(cors.preflight);
 server.use(cors.actual);
