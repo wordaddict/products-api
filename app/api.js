@@ -20,14 +20,14 @@ const logger = serviceLocator.get('logger');
 
 const restify = require('restify');
 const plugins = require('restify-plugins');
-const corsMiddleware = require('restify-cors-middleware')
+//const corsMiddleware = require('restify-cors-middleware')
 
-const cors = corsMiddleware({
-  preflightMaxAge: 5, //Optional
-  origins: ['*'],
-  allowHeaders: ['Content-Type', 'authentication', 'authorization', 'Accept'],
-  exposeHeaders: ['Content-Type', 'authentication', 'authorization', 'Accept'],
-})
+// const cors = corsMiddleware({
+//   preflightMaxAge: 5, //Optional
+//   origins: ['*'],
+//   allowHeaders: ['Content-Type', 'authentication', 'authorization', 'Accept'],
+//   exposeHeaders: ['Content-Type', 'authentication', 'authorization', 'Accept'],
+// })
 // set request handling and parsing
 
 
@@ -40,9 +40,17 @@ const server = restify.createServer({
     versions: ['1.0.0'],
 });
 
+server.use(
+  function crossOrigin(req,res,next){
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    return next();
+  }
+);
 
-server.pre(cors.preflight);
-server.use(cors.actual);
+
+// server.pre(cors.preflight);
+// server.use(cors.actual);
 
 // set API versioning and allow trailing slashes
 server.pre(restify.pre.sanitizePath());
