@@ -62,64 +62,69 @@
             color} = req.body;
             if (!name || !description || !price || !category || !color) {
                 return Response.failure(res, { message: 'Kindly add all fields: name, description, price, category, image, color' }, HttpStatus.BAD_REQUEST);
-                }
+            } else {
+              let param = {
+                name,
+                Id: uuid(),
+                description,
+                price,
+                category,
+                color,
+                img: {}
+            }
+            //console.log('param', param)
+            // if(req.files === undefined){
+            //   return Response.failure(res, { message: 'Kindly add photo' }, HttpStatus.BAD_REQUEST);
+            // }
+            // param.img['data'] = fs.readFileSync(req.files.photo.path);
+            // param.img.contentType = 'image/jpg';
             
-                let param = {
-                    name,
-                    Id: uuid(),
-                    description,
-                    price,
-                    category,
-                    color,
-                    img: {}
-                }
-                //console.log('param', param)
-                param.img['data'] = fs.readFileSync(req.files.photo.path);
-                param.img.contentType = 'image/jpg';
-        upload(req, res, (err) => {
-            param
-            const uploadrequest = req.files;
-            if (err) {
-              res.json({ error_code: 1, err_desc: err });
-              return;
+            // upload(req, res, (err) => {
+            //     param
+            //     const uploadrequest = req.files;
+            //     if (err) {
+            //       res.json({ error_code: 1, err_desc: err });
+            //       return;
+            //     }
+            //     /** Multer gives us file info in req.file object */
+            //     if (!uploadrequest) {
+            //       res.json({ error_code: 400, err_desc: 'No file passed' });
+            //       return;
+            //     }
+            //     const uploadedPhotoPath = req.files.photo.path;
+            //     if (err) {
+            //       reject(res.json({ error_code: 1, err_desc: err }));
+            //       return;
+            //     }
+            //     /** Multer gives us file info in req.file object */
+            //     if (!uploadedPhotoPath) {
+            //       reject(res.json({ error_code: 1, err_desc: 'No file passed' }));
+            //       return;
+            //     }
+                //console.log('param', param);
+                return this.ProductService.addNewProduct(param)
+                    .then((response) => {
+                        this.logger.info('Product added successfully')
+                        Response.success(res, {
+                        message: `products added successfully`,
+                        response: {
+                            name: response.name,
+                            category: response.category,
+                            description: response.description,
+                            price: response.price,
+                            color: response.color,
+                            Id: response.Id
+                        }
+                      })})
+                    .catch((error) => {
+                    this.logger.error('Error from adding a new product', error)
+                    return Response.failure(res, {
+                    message: error.msg,
+                    response: {},
+                    }, HttpStatus.NOT_FOUND)});
+            // });
             }
-            /** Multer gives us file info in req.file object */
-            if (!uploadrequest) {
-              res.json({ error_code: 400, err_desc: 'No file passed' });
-              return;
-            }
-            const uploadedPhotoPath = req.files.photo.path;
-            if (err) {
-              reject(res.json({ error_code: 1, err_desc: err }));
-              return;
-            }
-            /** Multer gives us file info in req.file object */
-            if (!uploadedPhotoPath) {
-              reject(res.json({ error_code: 1, err_desc: 'No file passed' }));
-              return;
-            }
-            //console.log('param', param);
-            return this.ProductService.addNewProduct(param)
-                .then((response) => {
-                    this.logger.info('Product added successfully')
-                    Response.success(res, {
-                    message: `products added successfully`,
-                    response: {
-                        name: response.name,
-                        category: response.category,
-                        description: response.description,
-                        price: response.price,
-                        color: response.color,
-                        Id: response.Id
-                    }
-                  })})
-                .catch((error) => {
-                this.logger.error('Error from adding a new product', error)
-                return Response.failure(res, {
-                message: error.msg,
-                response: {},
-                }, HttpStatus.NOT_FOUND)});
-        });
+
         
     }
 
