@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/wordaddict/products-api"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/gbnlrepo/work-day-microservice/issues"
+    "url": "https://github.com/wordaddict/products-api/issues"
   },
-  "homepage": "https://github.com/gbnlrepo/work-day-microservice#readme",
+  "homepage": "https://github.com/wordaddict/products-api#README.md",
   "dependencies": {
     "dotenv": "8.0.0",
     "express": "^4.17.1",
